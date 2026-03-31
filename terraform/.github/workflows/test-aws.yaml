@@ -1,0 +1,29 @@
+name: Deploy to EKS
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  id-token: write # 🔥 bắt buộc cho OIDC
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::513318930360:role/github-actions-role
+          aws-region: ap-northeast-2
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig \
+            --region ap-northeast-2 \
+            --name prod-demo-eks
