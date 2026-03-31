@@ -23,6 +23,6 @@ jobs:
           aws eks update-kubeconfig \
             --region ap-northeast-2 \
             --name prod-demo-eks
-          cat ~/.kube/config
-          kubectl use-context arn:aws:eks:ap-northeast-2:513318930360:cluster/prod-demo-eks
+      - name: get nodes
+        run: |
           kubectl get nodes
