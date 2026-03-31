@@ -1,7 +1,7 @@
 resource "aws_iam_openid_connect_provider" "github_actions" {
   url = var.github_oidc_url
   client_id_list = ["sts.amazonaws.com"]
-  thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
+  thumbprint_list = ["7560d6f40fa55195f740ee2b1b7c0b4836cbe103"]
 }
 
 # GitHub Actions role for OIDC -> limited permissions for ECR and EKS deploy
