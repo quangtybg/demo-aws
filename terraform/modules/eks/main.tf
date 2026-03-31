@@ -22,7 +22,7 @@ resource "aws_eks_cluster" "this" {
     subnet_ids = var.subnet_ids
     endpoint_private_access = true
     endpoint_public_access  = true
-
+    public_access_cidrs = ["0.0.0.0/0"]
   }
 
   depends_on = [aws_iam_role.eks_cluster]
@@ -66,13 +66,11 @@ resource "aws_eks_node_group" "workers" {
   subnet_ids      = var.subnet_ids
 
   scaling_config {
-    desired_size = var.node_group_desired_capacity
-    max_size     = var.node_group_max_capacity
-    min_size     = var.node_group_min_capacity
+    desired_size = 1
+    max_size     = 2
+    min_size     = 1
   }
 
-  ami_type = var.ami_type
-  instance_types = ["t3.micro"]
 }
 
 locals {
@@ -95,7 +93,4 @@ locals {
     ]
   ) : local.base_map_roles
 }
- 
 
- 
- 
