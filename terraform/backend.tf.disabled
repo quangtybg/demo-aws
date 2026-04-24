@@ -1,6 +1,0 @@
-terraform {
-  # Temporarily use local backend for debugging and planning.
-  backend "local" {
-    path = "terraform.tfstate"
-  }
-}
